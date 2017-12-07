@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+  <div class="row text-center">
+    <div class="col-md-12 jumbotron">
+      <h2 class="text-center">Logo here</h2><hr>
+      <h4 class="card-title ">Press any key to get started!</h4>
+      <button id="game-button" class="btn btn-success btn-md"><span class="glyphicon glyphicon-play-circle"></span> Play Again</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 text-center">
+      <h4>Current Word</h4>
+      <h4 id="display-word"></h4>
+      <h4 class="card-title">Wins</h4>
+      <h4 id="display-wins"></h4>
+    </div>
+
+    <div class="col-md-6 text-center">
+      <div class="card">
+        <h4># of Guesses Remaining</h4>
+        <h4 id="dispay-remaining"></h4>
+        <h4>Letters already Guessed</h4>
+        <h4 id="dispay-guessed"></h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 id="display-song-title"></h3>
+      <div id="display-img"></div>
+      <div id="youtube-audio"></div>
+      <button id="pause-button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pause mb5"></span> Pause Song</button>
+    </div>
+  </div>
+
+  <script src="assets/javascript/game.js"></script>
+
+
+</body>
+
+</html>
