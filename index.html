@@ -16,9 +16,15 @@
 <body>
   <div class="row text-center">
     <div class="col-md-12 jumbotron">
-      <h2 class="text-center">Logo here</h2><hr>
+      <header role="banner">
+        <img class="banner img-responsive" src="assets/images/hangman_logo.png" alt="Hangman Animated Movies Logo">
+      </header>
       <h4 class="card-title ">Press any key to get started!</h4>
-      <button id="game-button" class="btn btn-success btn-md"><span class="glyphicon glyphicon-play-circle"></span> Play Again</button>
+      <div class="button-text-decor">
+        <img class="img-responsive img-arrow left" src="assets/images/right_arrow.png" alt="Right Arrow">
+        <button id="game-button" class="btn btn-light btn-lg button-text-decor"><span class="glyphicon glyphicon-play-circle"></span> PLAY AGAIN</button>
+        <img class="img-responsive img-arrow right" src="assets/images/left_arrow.png" alt="Left Arrow">
+      </div>
     </div>
   </div>
 
@@ -48,6 +54,10 @@
       <button id="pause-button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pause mb5"></span> Pause Song</button>
     </div>
   </div>
+
+  <!-- <footer class="footer">
+    <div class="card-footer">Copyright &copy; 2017 Nalut Sangtakraw</div>
+  </footer> -->
 
   <script src="assets/javascript/game.js"></script>
 

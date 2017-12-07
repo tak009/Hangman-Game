@@ -1,6 +1,6 @@
 // Initiate global variables
 var winsCounter = 0;
-var remainingCounter = 10;
+var remainingCounter = 12;
 var currentWord = "";
 var lettersGuessedArr = [];
 var answersArr = [];
@@ -17,7 +17,7 @@ var moviesObj = {
   minions: {img:"img_minions.jpg", song:"happy_together.mp3", title:"Happy Together"},
   moana: {img:"img_moana.jpg", song:"how_far_i_ll_go.mp3", title:"How Far I'll Go"},
   mulan: {img:"img_mulan.jpg", song:"reflection.mp3", title:"Reflection"},
-  pinocchio: {img:"img_pinocchio.jpg", song:"colors_of_the_wind.mp3", title:"When You Wish Upon A Star"},
+  pinocchio: {img:"img_pinocchio.jpg", song:"when_you_wish_upon_the_star.mp3", title:"When You Wish Upon A Star"},
   pocahontas: {img:"img_pocahontas.jpg", song:"colors_of_the_wind.mp3", title:"Color of The Wind"},
   ratatouille: {img:"img_ratatouille.jpg", song:"le_festin.mp3", title:"Le Festin"},
   rango: {img:"img_rango.jpg", song:"welcome_amigo.mp3", title:"Welcome Amigo"},
@@ -49,36 +49,37 @@ window.addEventListener("load", function() {
   currentWord = chooseWord(moviesArr);
   pauseButton.style.visibility = 'hidden';
   displayRemaining.innerHTML = remainingCounter;
+  displayWins.innerHTML = winsCounter;
 });
 
 
-window.addEventListener("keyup", function(event) {
+document.addEventListener("keyup", function(event) {
 
-  // Determines which key was pressed.
+  // Determine which key was pressed.
   var userGuess = event.key.toUpperCase();
 
-  // Check if key pressed exists in the array
-  var isGuessed = lettersGuessedArr.indexOf(userGuess);
+  // Check if key already pressed exists in the array
+  var isCorrectGuessed = lettersGuessedArr.indexOf(userGuess);
   var isCompleted = answersArr.indexOf("_");
 
-  if (isGuessed === -1 && isCompleted !== -1 && remainingCounter > 0) {
+  if (isCorrectGuessed === -1 && isCompleted !== -1 && remainingCounter > 0) {
     // Store capitalized letter in the lettersGuessed array
     lettersGuessedArr.push(userGuess);
-
-    // Deduct remainingCounter by 1
-    if (remainingCounter > 0) {
-      remainingCounter--;
-    }
-
-  } else {
-    // Do nothing
+  }
+  else {
     return;
   }
 
-  displayGuessed.innerHTML = lettersGuessedArr;
-  displayRemaining.innerHTML = remainingCounter;
-
   checkWord();
+
+  if(remainingCounter > 0) {
+     displayRemaining.innerHTML = remainingCounter-lettersGuessedArr.length;
+  }
+  else {
+    displayRemaining.innerHTML = remainingCounter;
+  }
+
+  displayGuessed.innerHTML = lettersGuessedArr;
 });
 
 
@@ -86,7 +87,6 @@ function chooseWord(arr) {
   // Select a current word from words array
   var word = arr[Math.floor(Math.random() * arr.length)];
   console.log(word + " - " + word.length);
-  // console.log(Math.floor(Math.random() * arr.length));
 
   // Display underscores _ _ (string), number of underscores must match with number of letters in the selected word
   var answers = word.replace(/./g, "_ ");
@@ -101,17 +101,19 @@ function chooseWord(arr) {
 
 
 function checkWord() {
-  console.log(currentWord + " - " + currentWord.length);
   // Get the last letter guessed from the lettersGuessedArr
-  var guess = lettersGuessedArr[lettersGuessedArr.length - 1];
+  var lastLetterGuessed = lettersGuessedArr[lettersGuessedArr.length - 1];
 
   // Check if the last letter guessed matches with any letter in the word
   for (var i = 0; i < currentWord.length; i++) {
-    var capWord = currentWord[i].toUpperCase()
-    if (capWord === guess) {
-      // Replace "_" by a correct letter e.g. ["_","_","_"] --> ["A","_","_"]
-      answersArr[i] = answersArr[i].replace("_", capWord);
+    var capLetter = currentWord[i].toUpperCase();
+
+    if (lastLetterGuessed === capLetter) {
+      // Replace "_" by the correct letter e.g. ["_","_","_"] --> ["A","_","_"]
+      answersArr[i] = answersArr[i].replace("_", capLetter);
       var correctAnswer = answersArr.join("");
+      // Remove correct guessed letter from lettersGuessedArr
+      lettersGuessedArr.pop(lastLetterGuessed);
     }
   }
 
@@ -119,7 +121,7 @@ function checkWord() {
     console.log(correctAnswer + "  " + currentWord.length);
     winsCounter++;
 
-    // Get image, song, and title from the movie name
+    // Get image, song, and title from the movies object
     var image = moviesObj[correctAnswer.toLowerCase()].img;
     var song = moviesObj[correctAnswer.toLowerCase()].song;
     var title = moviesObj[correctAnswer.toLowerCase()].title;
@@ -135,8 +137,7 @@ function checkWord() {
     displaySongTitle.setAttribute("class", "text-decor");
     displayImg.appendChild(imgElement);
     pauseButton.style.visibility = 'visible';
-}
-
+  }
 
   displayWord.innerHTML = answersArr.join(" ");
   displayWins.innerHTML = winsCounter;
@@ -144,8 +145,8 @@ function checkWord() {
 }
 
 gameButton.addEventListener("click", function() {
-  // Reset all variables except winCounter
-  remainingCounter = 10;
+  // Reset all variables except winsCounter
+  remainingCounter = 12;
   currentWord = "";
   lettersGuessedArr = [];
   answersArr = [];
