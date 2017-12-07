@@ -33,6 +33,10 @@ img {
   color: blue;
 }
 
+.text-nondecor {
+  color: black;
+}
+
 .letter-decor {
   width: 30px;
   height: 30px;

@@ -1,6 +1,6 @@
 // Initiate global variables
 var winsCounter = 0;
-var remainingCounter = 12;
+var maxGuesses = 12;
 var currentWord = "";
 var lettersGuessedArr = [];
 var answersArr = [];
@@ -48,7 +48,7 @@ var hangmanObj = {
 window.addEventListener("load", function() {
   currentWord = chooseWord(moviesArr);
   pauseButton.style.visibility = 'hidden';
-  displayRemaining.innerHTML = remainingCounter;
+  displayRemaining.innerHTML = maxGuesses;
   displayWins.innerHTML = winsCounter;
 });
 
@@ -61,25 +61,26 @@ document.addEventListener("keyup", function(event) {
   // Check if key already pressed exists in the array
   var isCorrectGuessed = lettersGuessedArr.indexOf(userGuess);
   var isCompleted = answersArr.indexOf("_");
-
-  if (isCorrectGuessed === -1 && isCompleted !== -1 && remainingCounter > 0) {
+console.log("isCorrectGuessed " + isCorrectGuessed);
+console.log("isCompleted " + isCompleted);
+  if (isCorrectGuessed === -1 && isCompleted !== -1 && maxGuesses > 0) {
     // Store capitalized letter in the lettersGuessed array
     lettersGuessedArr.push(userGuess);
+
   }
   else {
     return;
   }
 
-  checkWord();
-
-  if(remainingCounter > 0) {
-     displayRemaining.innerHTML = remainingCounter-lettersGuessedArr.length;
-  }
-  else {
-    displayRemaining.innerHTML = remainingCounter;
+  if(lettersGuessedArr.length <= maxGuesses){
+    checkWord();
   }
 
-  displayGuessed.innerHTML = lettersGuessedArr;
+  console.log("lettersGuessedArr - " + lettersGuessedArr.length);
+  if(lettersGuessedArr.length <= maxGuesses) {
+     displayRemaining.innerHTML = maxGuesses-lettersGuessedArr.length;
+     displayGuessed.innerHTML = lettersGuessedArr;
+  }
 });
 
 
@@ -93,7 +94,7 @@ function chooseWord(arr) {
 
   // Convert string to array --> ["_","_","_"]
   answersArr = answers.trim().split(" ");
-
+  displayWord.setAttribute("class", "text-nondecor");
   displayWord.innerHTML = answers;
 
   return word;
@@ -146,12 +147,12 @@ function checkWord() {
 
 gameButton.addEventListener("click", function() {
   // Reset all variables except winsCounter
-  remainingCounter = 12;
+  maxGuesses = 12;
   currentWord = "";
   lettersGuessedArr = [];
   answersArr = [];
   currentWord = chooseWord(moviesArr);
-  displayRemaining.innerHTML = remainingCounter;
+  displayRemaining.innerHTML = maxGuesses;
   displayGuessed.innerHTML = lettersGuessedArr;
 });
 
