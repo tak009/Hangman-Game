@@ -52,28 +52,39 @@ img {
   display: inline-block;
 }
 
-.img-arrow{
+.bg-whitesmoke {
+  background: #eee;
+}
+
+.img-arrow {
   border: none;
   margin: 0;
   width: 20%;
 }
 
-.left{
+.left {
   float: left;
 }
 
-.right{
+.right {
   float: right;
 }
 
+.center {
+  line-height: 3;
+  display: inline-block;
+  vertical-align: middle;
+}
 
 .footer {
-  position: absolute;
+  position: fixed;
   background: #888;
   color: #fff;
+  margin-top: 100px;
   font-size: 12px;
   text-align: center;
-  height: 60px;
+  height: 40px;
+  left: 0;
   bottom: 0;
   width: 100%;
 }
