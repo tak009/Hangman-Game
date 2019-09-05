@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Hangman</title>
   <link rel="stylesheet" href="assets/css/reset.css">
   <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -19,7 +19,7 @@
       <header role="banner">
         <img class="banner img-responsive" src="assets/images/hangman_logo.png" alt="Hangman Animated Movies Logo">
       </header>
-      <h4 class="card-title ">Press any key to get started!</h4>
+      <h4 class="card-title">Press any key to get started!</h4>
       <div class="button-text-decor">
         <img class="img-responsive img-arrow left" src="assets/images/right_arrow.png" alt="Right Arrow">
         <button id="game-button" class="btn btn-light btn-lg button-text-decor"><span class="glyphicon glyphicon-play-circle"></span> PLAY AGAIN</button>
@@ -47,17 +47,16 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12 text-center">
+    <div id="song-section">
       <h3 id="display-song-title"></h3>
       <div id="display-img"></div>
-      <div id="youtube-audio"></div>
-      <button id="pause-button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pause mb5"></span> Pause Song</button>
+      <div id="play-audio"></div>
     </div>
   </div>
 
-  <!-- <footer class="footer">
-    <div class="card-footer">Copyright &copy; 2017 Nalut Sangtakraw</div>
-  </footer> -->
+  <footer class="footer">
+    <p class="center">Copyright &copy; 2017 Nalut Sangtakraw</p>
+  </footer>
 
   <script src="assets/javascript/game.js"></script>
 

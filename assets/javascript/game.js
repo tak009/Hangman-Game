@@ -35,34 +35,30 @@ var displayRemaining = document.getElementById("dispay-remaining");
 var displayWins = document.getElementById("display-wins");
 var displaySongTitle = document.getElementById("display-song-title");
 var displayImg = document.getElementById("display-img");
+var playAudio = document.getElementById("play-audio");
 var gameButton = document.getElementById("game-button");
 var pauseButton = document.getElementById("pause-button");
 var audioElement = document.createElement("audio");
 var imgElement = document.createElement("img");
+var songSection = document.getElementById("song-section");
 
-var hangmanObj = {
-
-};
 
 // Load the game when the browser first loaded
 window.addEventListener("load", function() {
   currentWord = chooseWord(moviesArr);
-  pauseButton.style.visibility = 'hidden';
+  //pauseButton.style.visibility = 'hidden';
   displayRemaining.innerHTML = maxGuesses;
   displayWins.innerHTML = winsCounter;
 });
 
-
 document.addEventListener("keyup", function(event) {
-
   // Determine which key was pressed.
   var userGuess = event.key.toUpperCase();
 
   // Check if key already pressed exists in the array
   var isCorrectGuessed = lettersGuessedArr.indexOf(userGuess);
   var isCompleted = answersArr.indexOf("_");
-console.log("isCorrectGuessed " + isCorrectGuessed);
-console.log("isCompleted " + isCompleted);
+
   if (isCorrectGuessed === -1 && isCompleted !== -1 && maxGuesses > 0) {
     // Store capitalized letter in the lettersGuessed array
     lettersGuessedArr.push(userGuess);
@@ -76,7 +72,6 @@ console.log("isCompleted " + isCompleted);
     checkWord();
   }
 
-  console.log("lettersGuessedArr - " + lettersGuessedArr.length);
   if(lettersGuessedArr.length <= maxGuesses) {
      displayRemaining.innerHTML = maxGuesses-lettersGuessedArr.length;
      displayGuessed.innerHTML = lettersGuessedArr;
@@ -103,6 +98,7 @@ function chooseWord(arr) {
 
 function checkWord() {
   // Get the last letter guessed from the lettersGuessedArr
+  console.log("lettersGuessedArr", lettersGuessedArr);
   var lastLetterGuessed = lettersGuessedArr[lettersGuessedArr.length - 1];
 
   // Check if the last letter guessed matches with any letter in the word
@@ -119,7 +115,6 @@ function checkWord() {
   }
 
   if (correctAnswer === currentWord.toUpperCase()) {
-    console.log(correctAnswer + "  " + currentWord.length);
     winsCounter++;
 
     // Get image, song, and title from the movies object
@@ -128,16 +123,19 @@ function checkWord() {
     var title = moviesObj[correctAnswer.toLowerCase()].title;
 
     // Show image and play a song if user guesses correctly
+    songSection.setAttribute("class", "col-md-12 text-center bg-whitesmoke");
     imgElement.setAttribute("src", "assets/images/" + image);
     imgElement.setAttribute("class", "img-responsive img-rounded center-block");
+    audioElement.setAttribute("controls","");
+    audioElement.setAttribute("autoplay","");
+    audioElement.innerHTML = '<source></source>';
     audioElement.setAttribute("src", "assets/audios/" + song);
-    audioElement.play();
-
+    audioElement.setAttribute("type", "audio/mpeg");
     displayWord.setAttribute("class", "text-decor");
     displaySongTitle.innerHTML = title;
     displaySongTitle.setAttribute("class", "text-decor");
     displayImg.appendChild(imgElement);
-    pauseButton.style.visibility = 'visible';
+    playAudio.appendChild(audioElement);
   }
 
   displayWord.innerHTML = answersArr.join(" ");
@@ -154,8 +152,4 @@ gameButton.addEventListener("click", function() {
   currentWord = chooseWord(moviesArr);
   displayRemaining.innerHTML = maxGuesses;
   displayGuessed.innerHTML = lettersGuessedArr;
-});
-
-pauseButton.addEventListener("click", function() {
-  audioElement.pause();
 });
